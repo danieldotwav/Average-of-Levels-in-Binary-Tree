@@ -10,14 +10,53 @@ void deleteTree(TreeNode* root);
 void printVector(const vector<double>& container);
 
 int main() {
-	// Given the root of a binary tree, return the average value of the nodes on each level in the form of an array.
 	
+	// Case 1: Empty Tree
+	std::cout << "Case 1: Empty Tree" << std::endl;
 	TreeNode* emptyTree = nullptr;
 	printVector(averageOfLevels(emptyTree)); // Expected: EMPTY
 
+	// Case 2: Partially Filled Tree
+	std::cout << "Case 2: Partially Filled Tree" << std::endl;
 	TreeNode* filledTree = buildTree({ 3, 9, 20, INT_MIN, INT_MIN, 15, 7 });
 	printVector(averageOfLevels(filledTree)); // Expected: [3, 14.5, 11]
 	deleteTree(filledTree);
+
+	// Case 3: Single Node Tree
+	std::cout << "Case 3: Single Node Tree" << std::endl;
+	TreeNode* singleNodeTree = buildTree({ 42 });
+	printVector(averageOfLevels(singleNodeTree)); // Expected: [42]
+	deleteTree(singleNodeTree);
+
+	// Case 4: Full Tree
+	std::cout << "Case 4: Full Tree" << std::endl;
+	TreeNode* fullTree = buildTree({ 1, 2, 3, 4, 5, 6, 7 });
+	printVector(averageOfLevels(fullTree)); // Expected: [1, 2.5, 5.5]
+	deleteTree(fullTree);
+
+	// Case 5: Left-skewed Tree
+	std::cout << "Case 5: Left-skewed Tree" << std::endl;
+	TreeNode* leftSkewedTree = buildTree({ 1, 2, INT_MIN, 3 });
+	printVector(averageOfLevels(leftSkewedTree)); // Expected: [1, 2, 3]
+	deleteTree(leftSkewedTree);
+
+	// Case 6: Right-skewed Tree
+	std::cout << "Case 6: Right-skewed Tree" << std::endl;
+	TreeNode* rightSkewedTree = buildTree({ 1, INT_MIN, 2, INT_MIN, 3 });
+	printVector(averageOfLevels(rightSkewedTree)); // Expected: [1, 2, 3]
+	deleteTree(rightSkewedTree);
+
+	// Case 7: Tree with only left children
+	std::cout << "Case 7: Tree with only left children" << std::endl;
+	TreeNode* leftChildrenTree = buildTree({ 1, 2, INT_MIN, 4, INT_MIN, INT_MIN, 8 });
+	printVector(averageOfLevels(leftChildrenTree)); // Expected: [1, 2, 4, 8]
+	deleteTree(leftChildrenTree);
+
+	// Case 8: Tree with only right children
+	std::cout << "Case 8: Tree with only right children" << std::endl;
+	TreeNode* rightChildrenTree = buildTree({ 1, INT_MIN, 3, INT_MIN, 7 });
+	printVector(averageOfLevels(rightChildrenTree)); // Expected: [1, 3, 7]
+	deleteTree(rightChildrenTree);
 
 	return 0;
 }
@@ -113,7 +152,7 @@ void printVector(const vector<double>& container) {
 				cout << ", ";
 			}
 		}
-		cout << "]";
+		cout << "]\n\n";
 	}
 }
 
